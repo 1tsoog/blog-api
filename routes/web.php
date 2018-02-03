@@ -19,3 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/create-token', 'HomeController@createToken')->name('createToken');
+Route::get('/api-test', 'HomeController@apiTestPage')->name('apiTestPage');
+Route::post('/api-test', 'HomeController@apiTestCreate')->name('apiTestCreate');

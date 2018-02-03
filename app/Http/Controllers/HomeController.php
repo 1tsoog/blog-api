@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -43,5 +46,40 @@ class HomeController extends Controller
         $user->save();
 
         return redirect('home');
+    }
+
+    public function apiTestPage()
+    {
+        return view('apitest', [
+            'apiToken' =>  Auth::user()->api_token
+        ]);
+    }
+
+    public function apiTestCreate(Request $request)
+    {
+        Validator::make($request->all(), [
+            'categoryTitle' => 'required|string|max:255',
+            'categoryDescription' => 'required|string|max:1000',
+            'postTitle' => 'required|string|max:255',
+            'postDescription' => 'required|string|max:1000',
+        ])->validate();
+
+        $category = new Category([
+            'title' => $request->input('categoryTitle'),
+            'description' => $request->input('categoryDescription'),
+        ]);
+        $category->save();
+
+        $post = new Post([
+            'title' => $request->input('postTitle'),
+            'content' => $request->input('postDescription'),
+        ]);
+        $post->user_id = Auth::id();
+        $post->save();
+
+        return response()->json([
+            'cateogry' => $category,
+            'post' => $post,
+        ]);
     }
 }

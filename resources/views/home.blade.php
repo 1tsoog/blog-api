@@ -20,11 +20,14 @@
                             <div style="overflow-wrap: break-word; word-wrap: break-word; background: gainsboro; font-size: 0.9em; padding: 15px 5px;">
                                 {{ $userToken  }}
                             </div>
-                            <div><a href="{{route('createToken')}}">СОЗДАТЬ</a> новый.</div>
+                            <div><a href="{{route('createToken')}}" class="btn btn-primary">СОЗДАТЬ НОВЫЙ ТОКЕН</a></div>
                         </div>
                     @else
-                        Вы не создавали токен доступа к API. <a href="{{route('createToken')}}">СОЗДАТЬ</a>.
+                        Вы не создавали токен доступа к API. <a href="{{route('createToken')}}" class="btn btn-primary">СОЗДАТЬ</a>.
                     @endif
+                    <div>
+                        <a href="{{route('apiTestPage')}}" class="btn btn-success">ПРОТЕСТИРОВАТЬ СУЩЕСТВУЮЩЕЕ API</a>
+                    </div>
                 </div>
             </div>
         </div>
