@@ -23,3 +23,9 @@ Route::post('/post', 'API\PostController@createPost')->name('api.createPost');
 Route::get('/post/{id}', 'API\PostController@showPost')->name('api.showPost');
 Route::put('/post/{id}', 'API\PostController@updatePost')->name('api.updatePost');
 Route::delete('/post/{id}', 'API\PostController@deletePost')->name('api.deletePost');
+
+Route::get('/category', 'API\CategoryController@getcategories')->name('api.getcategories');
+Route::post('/category', 'API\CategoryController@createcategory')->name('api.createcategory');
+Route::get('/category/{id}', 'API\CategoryController@showcategory')->name('api.showcategory');
+Route::put('/category/{id}', 'API\CategoryController@updatecategory')->name('api.updatecategory');
+Route::delete('/category/{id}', 'API\CategoryController@deletecategory')->name('api.deletecategory');
