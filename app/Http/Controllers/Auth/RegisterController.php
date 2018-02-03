@@ -66,6 +66,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'api_token' => preg_replace('~[^A-Za-z0-9]~', '', uniqid() . encrypt(random_bytes(32))),
         ]);
     }
 }

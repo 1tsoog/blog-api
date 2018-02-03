@@ -25,10 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $token = UserToken::where('user_id', Auth::id())->first();
+        $token = Auth::user()->api_token;
 
         return view('home', [
-            'userToken' => $token ? $token->token : null,
+            'userToken' => $token ? $token : null,
         ]);
     }
 
@@ -39,16 +39,9 @@ class HomeController extends Controller
      */
     public function createToken()
     {
-        $userId = Auth::id();
-        $secret = preg_replace('~[^A-Za-z0-9]~', '', $userId . encrypt(random_bytes(64)));
-
-        $token = UserToken::where('user_id', Auth::id())->first();
-
-        // Если токен существует, обновляем его, иначе создаем новый
-        $token = $token ? $token : new UserToken();
-        $token->token = $secret;
-        $token->user_id = $userId;
-        $token->save();
+        $user = Auth::user();
+        $user->api_token = preg_replace('~[^A-Za-z0-9]~', '', $user->id . encrypt(random_bytes(32)));
+        $user->save();
 
         return redirect('home');
     }
