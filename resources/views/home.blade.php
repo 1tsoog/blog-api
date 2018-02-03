@@ -14,7 +14,17 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    @if(isset($userToken))
+                        <div>
+                            Ваш токен доступа к API:
+                            <div style="overflow-wrap: break-word; word-wrap: break-word; background: gainsboro; font-size: 0.9em; padding: 15px 5px;">
+                                {{ $userToken  }}
+                            </div>
+                            <div><a href="{{route('createToken')}}">СОЗДАТЬ</a> новый.</div>
+                        </div>
+                    @else
+                        Вы не создавали токен доступа к API. <a href="{{route('createToken')}}">СОЗДАТЬ</a>.
+                    @endif
                 </div>
             </div>
         </div>
