@@ -27,6 +27,18 @@
 
 
 
+VirtualHosts for local dev
 
+    <VirtualHost blogapi.dev:80>
+    ServerAdmin admin@mail.ru
+    DocumentRoot "H:/WEB/Xampp/htdocs/blogapi.dev/public"
+    ServerName blogapi.dev
+	<Directory blogapi.dev/public >
+        Options FollowSymLinks
+        AllowOverride FileInfo Options
+    </Directory>
+    ErrorLog "logs/blogapi.dev-error.log"
+    CustomLog "logsblogapi.dev-access.log" common
+    </VirtualHost>
 
 
